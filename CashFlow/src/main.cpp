@@ -1,6 +1,7 @@
 #include "precompile.h"
+#include "app.h"
 
 int main()
 {
-	std::cout << "Hello, World!" << std::endl;
+    app app;
 }
