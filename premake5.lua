@@ -1,7 +1,6 @@
 workspace "CashFlow"
-    location "../"
+    startproject "CashFlow"
     architecture "x86_64"
-
     configurations { "Debug", "Release" }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -15,7 +14,7 @@ project "CashFlow"
     targetdir ("./bin/" .. outputdir .. "/%{prj.name}")
     objdir ("./bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files { "./%{prj.name}/src/**.cpp", "./%{prj.name}/src/**.h" }
+    files { "./%{prj.name}/src/**.cpp", "./%{prj.name}/lib/**.h" }
 
     includedirs { "./vendor/raylib/include", "./%{prj.name}/src", "./%{prj.name}/lib" }
 
@@ -23,7 +22,7 @@ project "CashFlow"
 
     links { "raylibdll" }
 
-    postbuildcommands { ("{COPY} ./vendor/raylib/lib/raylib.dll ./bin/" .. outputdir .. "/%{prj.name}") }
+    postbuildcommands { "{COPY} \"%{wks.location}/vendor/raylib/lib/raylib.dll\" \"%{cfg.targetdir}\"" }
 
     staticruntime "On"
     systemversion "latest"
