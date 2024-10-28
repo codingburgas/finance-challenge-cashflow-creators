@@ -2,11 +2,11 @@
 #define LOGIN_PAGE_H
 
 #include <string>
-#include <C:\Program Files\MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\statement.h>
-#include <C:\Program Files\MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\prepared_statement.h>
-#include <C:\Program Files\MySQL\MySQL Connector C++ 9.1\include\jdbc\mysql_driver.h>
-#include <C:\Program Files\MySQL\MySQL Connector C++ 9.1\include\jdbc\mysql_connection.h>
-#include <C:\Program Files\MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\resultset.h>
+#include <MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\statement.h>
+#include <MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\prepared_statement.h>
+#include <MySQL\MySQL Connector C++ 9.1\include\jdbc\mysql_driver.h>
+#include <MySQL\MySQL Connector C++ 9.1\include\jdbc\mysql_connection.h>
+#include <MySQL\MySQL Connector C++ 9.1\include\jdbc\cppconn\resultset.h>
 
 class LoginPage {
 public:
