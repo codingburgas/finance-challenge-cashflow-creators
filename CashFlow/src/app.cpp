@@ -23,7 +23,7 @@ void app::display()
     BeginDrawing();
 
     //Set background color
-    ClearBackground(BLACK);
+    ClearBackground(GRAY);
 
     pageHandler();
 

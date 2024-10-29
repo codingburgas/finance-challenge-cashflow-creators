@@ -1,12 +1,19 @@
 #pragma once
 #include "precompile.h"
 #include "pageHandle.h"
+#include "register.h"
 
 class reg {
 public:
 	void displayRegisterPage();
 	void buttonHandler(pageBools& pages);
 
+	void textBoxHandler();
+	bool registerHandler();
+	std::string firstName = "Sam";
+	std::string lastName = "Davidson";
+	std::string email = "samD@gmail.com";
+	std::string phoneNum = "0812356781";
 	float borderThickness = 2;
 	Font customFont = GetFontDefault();
 	Color borderColor = BLACK;
