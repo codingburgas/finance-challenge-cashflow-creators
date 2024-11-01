@@ -17,7 +17,9 @@ public:
     void display();
     void update();
     void pageHandler();
+    void textures();
 
+    Color background = { 113, 121, 126, 255 };
     char username[15] = "\0";
     int userCharCount = 0;
     char password[15] = "\0";

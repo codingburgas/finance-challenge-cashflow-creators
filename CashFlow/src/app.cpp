@@ -7,15 +7,20 @@ app::app()
     SetTargetFPS(30);
 
     update();
+
 }
 
 void app::update()
 {
+    textures();
+
     while (!WindowShouldClose())
     {
         display();
     }
+
     CloseWindow();
+
 }
 
 void app::display()
@@ -23,7 +28,7 @@ void app::display()
     BeginDrawing();
 
     //Set background color
-    ClearBackground(GRAY);
+    ClearBackground(BLACK);
 
     pageHandler();
 
@@ -52,4 +57,8 @@ void app::pageHandler()
         login.buttonHandler(pageBools);
         return;
     }
+}
+
+void app::textures() {
+    mainMenu.mainMenuTextures();
 }

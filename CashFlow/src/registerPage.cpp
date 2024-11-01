@@ -96,6 +96,3 @@ void reg::textBoxHandler()
     }
     SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
-bool reg::registerHandler() {
-    registerUser(firstName, lastName, email, phoneNum);            //Registers the users info into the database
-}

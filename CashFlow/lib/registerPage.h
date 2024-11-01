@@ -1,7 +1,6 @@
 #pragma once
 #include "precompile.h"
 #include "pageHandle.h"
-#include "register.h"
 
 class reg {
 public:
@@ -9,7 +8,6 @@ public:
 	void buttonHandler(pageBools& pages);
 
 	void textBoxHandler();
-	bool registerHandler();
 	std::string firstName = "Sam";
 	std::string lastName = "Davidson";
 	std::string email = "samD@gmail.com";
