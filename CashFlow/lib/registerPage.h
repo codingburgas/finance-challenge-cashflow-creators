@@ -6,8 +6,9 @@ class reg {
 public:
 	void displayRegisterPage();
 	void buttonHandler(pageBools& pages);
-
 	void textBoxHandler();
+	bool registerHandler();
+
 	std::string firstName = "Sam";
 	std::string lastName = "Davidson";
 	std::string email = "samD@gmail.com";
