@@ -57,6 +57,25 @@ void app::pageHandler()
         login.buttonHandler(pageBools);
         return;
     }
+
+    if (pageBools.incomeWindowShouldDisplay)
+    {
+        mainMenu.displayMainMenu();
+        mainMenu.displayIncomeWindow();
+        mainMenu.buttonHandler(pageBools);
+        mainMenu.textBoxHandler();
+        return;
+    }
+
+    if (pageBools.expensesWindowShouldDisplay)
+    {
+        mainMenu.displayMainMenu();
+        mainMenu.displayExpensesWindow();
+        mainMenu.buttonHandler(pageBools);
+        mainMenu.textBoxHandler();
+        return;
+    }
+
 }
 
 void app::textures() {
