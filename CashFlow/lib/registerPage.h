@@ -26,7 +26,7 @@ private:
 	std::string firstName;
 	std::string lastName;
 	std::string email;
-	std::string phoneNum;
+	std::string password;
 
 	Rectangle usernameText = { 570, 275, 300, 50 };
 	Rectangle usernameTextHitbox = { 582, 287, 280, 30 };

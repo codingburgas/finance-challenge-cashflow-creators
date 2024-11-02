@@ -8,4 +8,4 @@ void writeInFile(std::fstream& file, std::string& line);
 
 bool checkIfInFile(std::fstream& file, std::string& line);
 
-bool checkIfInFileLine(std::fstream& file, std::string& username);
+bool checkIfInFileLine(std::fstream& file, std::string& firstName, std::string lastName);

@@ -106,66 +106,66 @@ void mainMenu::buttonHandler(pageBools& pages)
     }
     else
 
-    //expenses window button
-    if (CheckCollisionPointRec(GetMousePosition(), { 360, 720, 100, 20 }))
-    {
-        if (pages.expensesWindowShouldDisplay == false) {
-            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                pages.mainPageShouldDisplay = false;
-                pages.registerPageShouldDisplay = false;
-                pages.loginPageShouldDisplay = false;
-                pages.incomeWindowShouldDisplay = false;
-                pages.expensesWindowShouldDisplay = true;
+        //expenses window button
+        if (CheckCollisionPointRec(GetMousePosition(), { 360, 720, 100, 20 }))
+        {
+            if (pages.expensesWindowShouldDisplay == false) {
+                SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    pages.mainPageShouldDisplay = false;
+                    pages.registerPageShouldDisplay = false;
+                    pages.loginPageShouldDisplay = false;
+                    pages.incomeWindowShouldDisplay = false;
+                    pages.expensesWindowShouldDisplay = true;
+                }
             }
         }
-    }
     else
                 
     //income window button
-    if (CheckCollisionPointRec(GetMousePosition(), { 520, 700, 55, 40 }))
-    {
-        if (pages.incomeWindowShouldDisplay == false) {
-             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                 pages.mainPageShouldDisplay = false;
-                 pages.registerPageShouldDisplay = false;
-                 pages.loginPageShouldDisplay = false;
-                 pages.incomeWindowShouldDisplay = true;
-                 pages.expensesWindowShouldDisplay = false;
-             }
-        }
+        if (CheckCollisionPointRec(GetMousePosition(), { 520, 700, 55, 40 }))
+        {
+            if (pages.incomeWindowShouldDisplay == false) {
+                 SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                     pages.mainPageShouldDisplay = false;
+                     pages.registerPageShouldDisplay = false;
+                     pages.loginPageShouldDisplay = false;
+                     pages.incomeWindowShouldDisplay = true;
+                     pages.expensesWindowShouldDisplay = false;
+                 }
             }
+        }
     else
 
     //close window button
-    if (CheckCollisionPointRec(GetMousePosition(), { 545, 225, 30, 30 }))
-    {
-        if (pages.mainPageShouldDisplay == false) {
+        if (CheckCollisionPointRec(GetMousePosition(), { 545, 225, 30, 30 }))
+        {
+            if (pages.mainPageShouldDisplay == false) {
+                 SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                     pages.mainPageShouldDisplay = true;
+                     pages.registerPageShouldDisplay = false;
+                     pages.loginPageShouldDisplay = false;
+                     pages.incomeWindowShouldDisplay = false;
+                     pages.expensesWindowShouldDisplay = false;
+                 }
+            }
+        }
+    else
+
+    //login button
+        if (CheckCollisionPointRec(GetMousePosition(), loginNowButton))
+        {
              SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
              if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                 pages.mainPageShouldDisplay = true;
-                 pages.registerPageShouldDisplay = false;
+                 pages.mainPageShouldDisplay = false;
+                 pages.registerPageShouldDisplay = true;
                  pages.loginPageShouldDisplay = false;
                  pages.incomeWindowShouldDisplay = false;
                  pages.expensesWindowShouldDisplay = false;
              }
         }
-            }
-    else
-
-    //login button
-    if (CheckCollisionPointRec(GetMousePosition(), loginNowButton))
-    {
-         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-             pages.mainPageShouldDisplay = false;
-             pages.registerPageShouldDisplay = true;
-             pages.loginPageShouldDisplay = false;
-             pages.incomeWindowShouldDisplay = false;
-             pages.expensesWindowShouldDisplay = false;
-         }
-    }
     else
 
          {

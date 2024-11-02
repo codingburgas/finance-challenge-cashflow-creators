@@ -132,13 +132,29 @@ void login::textBoxHandler()
 		}
 		return;
 	}
+
+	if (CheckCollisionPointRec(GetMousePosition(), emailTextHitbox))
+	{
+		SetMouseCursor(MOUSE_CURSOR_IBEAM);
+		int key = GetCharPressed();
+		if ((key >= 32) && (key <= 125) && (password.size() < 24))
+		{
+			password.push_back((char)key);
+		}
+		if (IsKeyPressed(KEY_BACKSPACE))
+		{
+			if (password.size() > 0)
+				password.pop_back();
+		}
+		return;
+	}
 	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
 
 bool login::loginHandler()
 {
 	bool check = false;
-	std::string fileLine = createFileLine(firstName, lastName);
+	std::string fileLine = createFileLine(firstName, lastName, password);
 	std::fstream loginFile;
 	loginFile.open("../files/login.txt", std::ios::in | std::ios::out);
 	if (checkIfInFile(loginFile, fileLine))

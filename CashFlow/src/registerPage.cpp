@@ -43,13 +43,15 @@ void reg::displayRegisterPage()
 
 	//Draw email text box
 	DrawRectangleLinesEx(emailText, 0.7, MG);
-	if (email.size() > 0)
+	if (password.size() > 0)
 	{
-		DrawTextEx(font, email.c_str(), { 582, 487 }, 25, 0.7, MG);
+		DrawTextEx(font, password.c_str(), { 582, 487 }, 25, 0.7, MG);
 	}
 	else DrawTextEx(font, "Email", { 582, 487 }, 25, 0.7, background);
 
-
+	if (!checkPassword(password)) {
+		DrawTextEx(font, "Password incompatable", { 582, 530 }, 25, 0.7, MG);
+	}
 
 	//Draw register button
 	DrawTextureEx(regButton, { 535, 600 }, 0, 0.62, WHITE);
@@ -139,6 +141,22 @@ void reg::textBoxHandler()
 		}
 		return;
 	}
+
+	if (CheckCollisionPointRec(GetMousePosition(), emailTextHitbox))
+	{
+		SetMouseCursor(MOUSE_CURSOR_IBEAM);
+		int key = GetCharPressed();
+		if ((key >= 32) && (key <= 125) && (password.size() < 24))
+		{
+			password.push_back((char)key);
+		}
+		if (IsKeyPressed(KEY_BACKSPACE))
+		{
+			if (password.size() > 0)
+				password.pop_back();
+		}
+		return;
+	}
 	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
 
@@ -151,8 +169,8 @@ bool reg::registerHandler()
 		std::cout << "login.txt failed to load!";
 	else
 	{
-		std::string fileLine = createFileLine(firstName, lastName);
-		check = checkIfInFileLine(loginFile, firstName);
+		std::string fileLine = createFileLine(firstName, lastName, password);
+		check = checkIfInFileLine(loginFile, firstName, lastName);
 		loginFile.close();
 		loginFile.open("../files/login.txt", std::ios::in | std::ios::out | std::ios::app);
 		if (!check)

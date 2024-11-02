@@ -26,24 +26,29 @@ bool checkPassword(std::string password)
         return false;
 }
 
-bool checkValidity(std::string registerUsername, std::string registerPassword)
+bool checkValidity(std::string firstName, std::string registerPassword, std::string lastName)
 {
     bool checkValidityB = false;
-    if (checkPassword(registerPassword) && checkUsername(registerUsername))
+    if (checkPassword(registerPassword) && checkFirstName(firstName) && checkLastName(lastName))
     {
         checkValidityB = true;
     }
     return checkValidityB;
 }
 
-bool checkUsername(std::string username)
+bool checkFirstName(std::string firstName)
 {
-    return !(username.find(' ') != std::string::npos);
+    return !(firstName.find(' ') != std::string::npos);
 }
 
-std::string createFileLine(std::string& loginUsername, std::string& loginPassword)
+bool checkLastName(std::string lastName)
+{
+    return !(lastName.find(' ') != std::string::npos);
+}
+
+std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword)
 {
     std::string inputLine;
-    inputLine = loginUsername + " " + loginPassword;
+    inputLine = loginFirstName + " " + loginlastName + " " + loginPassword;
     return inputLine;
 }

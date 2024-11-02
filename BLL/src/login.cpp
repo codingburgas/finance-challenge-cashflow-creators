@@ -1,9 +1,9 @@
 #include "../lib/precompileBLL.h"
 #include "../lib/login.h"
 
-std::string createFileLine(std::string& loginUsername, std::string& loginPassword)
+std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword)
 {
     std::string inputLine;
-    inputLine = loginUsername + " " + loginPassword;
+    inputLine = loginFirstName + " " + loginPassword;
     return inputLine;
 }

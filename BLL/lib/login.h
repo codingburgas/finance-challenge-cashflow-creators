@@ -1,4 +1,4 @@
 #pragma once
 #include "precompileBLL.h"
 
-std::string createFileLine(std::string& loginUsername, std::string& loginPassword);
+std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword);
