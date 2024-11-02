@@ -83,4 +83,5 @@ void app::pageHandler()
 void app::textures() {
     mainMenu.mainMenuTextures();
     reg.registerPageTextures();
+    login.loginPageTextures();
 }

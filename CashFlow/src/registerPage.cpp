@@ -52,7 +52,7 @@ void reg::displayRegisterPage()
 
 
 	//Draw register button
-	DrawTextureEx(regButton, { 495, 600 }, 0, 0.75, WHITE);
+	DrawTextureEx(regButton, { 535, 600 }, 0, 0.62, WHITE);
 	DrawRectangleLinesEx(regWindow, 0.7, MG);
 }
 
@@ -72,6 +72,20 @@ void reg::buttonHandler(pageBools& pages)
 				pages.incomeWindowShouldDisplay = false;
 				pages.expensesWindowShouldDisplay = false;
 			}
+		}
+		return;
+	}
+	else
+	if (CheckCollisionPointRec(GetMousePosition(), loginButton))
+	{
+		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			pages.mainPageShouldDisplay = false;
+			pages.registerPageShouldDisplay = false;
+			pages.loginPageShouldDisplay = true;
+			pages.incomeWindowShouldDisplay = false;
+			pages.expensesWindowShouldDisplay = false;
 		}
 		return;
 	}

@@ -36,6 +36,7 @@ private:
 	Rectangle emailTextHitbox = { 582, 487, 280, 30 };
 	Rectangle registerButton = { 600, 690, 236, 90 };
 	Rectangle homeButton = { 1330, 23, 70, 30 };
+	Rectangle loginButton = { 800, 800, 120, 20 };
 
 	Rectangle regWindow = { 420, 180, 600, 670 };
 	Color customBrown = { 92, 83, 70, 255 };

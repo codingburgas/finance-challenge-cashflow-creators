@@ -1,37 +1,55 @@
 #include "../lib/precompile.h"
 #include "../lib/loginPage.h"
 
+void login::loginPageTextures() {
+	Logo = LoadTexture("assets/cfGlobe.png");
+	font = LoadFont("assets/LuxuriousRoman-Regular.ttf");
+	loginBtn = LoadTexture("assets/loginBtn.png");
+}
+
 void login::displayLoginPage()
 {
-	DrawTextEx(customFont, "Login Before Starting", Vector2{ 700, 280 }, 50, 3, BLACK);
+	//TaskBar
+	DrawRectangle(0, 0, 730, 40, MG);
+	DrawRectangle(730, 0, 900, 75, MG);
+	DrawRing(ringCenter, 20, -8.5, 180, 0, 300, customBrown);
+	DrawTextureEx(Logo, logoPos, 0, 0.4, WHITE);
+	DrawTextEx(font, "CashFlow Banking", { 1000, 23 }, 32, 0.7, BLACK);
 
-	//Draw back button
-	DrawRectangle(1700, 50, 70, 70, BLUE);
-	DrawText("<-", 1705, 53, 70, LIGHTGRAY);
+	//Draw register window
+	DrawRectangleRec(loginWindow, BLACK);
+	DrawTextEx(font, "Log into CashFlow!", { 575, 200 }, 40, 0.7, MG);
+	DrawTextEx(font, "Don't have an account?", { 540, 800 }, 24, 0.7, background);
+	DrawTextEx(font, "Register Here!", { 790, 800 }, 24, 0.7, MG);
 
 	//Draw username text box
-	DrawRectangle(820, 415, 280, 45, RAYWHITE);
-	DrawRectangleLinesEx(usernameText, borderThickness, borderColor);
-	if (username[0] != '\0')
-		DrawText(username.c_str(), 835, 430, 20, BLACK);
-
-	else DrawText("Username", 835, 430, 20, LIGHTGRAY);
-
-	//Draw password text box
-	DrawRectangle(820, 515, 280, 45, RAYWHITE);
-	DrawRectangleLinesEx(passwordText, borderThickness, borderColor);
-	if (password[0] != '\0')
+	DrawRectangleLinesEx(usernameText, 0.7, MG);
+	if (firstName.size() > 0)
 	{
-		for (int i = 0; i < password.size(); i++)
-			DrawText("*", 835 + i * 11, 530, 20, BLACK);
+		DrawTextEx(font, firstName.c_str(), { 582, 287 }, 25, 0.7, MG);
 	}
-	else DrawText("Password", 835, 530, 20, LIGHTGRAY);
+	else DrawTextEx(font, "First Name", { 582, 287 }, 25, 0.7, background);
+
+	//Draw surname text box
+	DrawRectangleLinesEx(passwordText, 0.7, MG);
+	if (lastName.size() > 0)
+	{
+		DrawTextEx(font, lastName.c_str(), { 582, 387 }, 25, 0.7, MG);
+	}
+	else DrawTextEx(font, "Surname", { 582, 387 }, 25, 0.7, background);
+
+	//Draw email text box
+	DrawRectangleLinesEx(emailText, 0.7, MG);
+	if (email.size() > 0)
+	{
+		DrawTextEx(font, email.c_str(), { 582, 487 }, 25, 0.7, MG);
+	}
+	else DrawTextEx(font, "Email", { 582, 487 }, 25, 0.7, background);
 
 	//Draw login button
-	DrawRectangle(820, 660, 280, 90, BLUE);
-	DrawText("Login", 905, 685, 40, LIGHTGRAY);
+	DrawTextureEx(loginBtn, { 535, 600 }, 0, 1, WHITE);
+	DrawRectangleLinesEx(loginWindow, 0.7, MG);
 
-	DrawRectangleLinesEx(Border, 1, borderColor);
 }
 
 void login::buttonHandler(pageBools& pages)
@@ -50,8 +68,22 @@ void login::buttonHandler(pageBools& pages)
 			}
 		}
 	}
-
-	if (CheckCollisionPointRec(GetMousePosition(), backButton))
+	else
+	if (CheckCollisionPointRec(GetMousePosition(), registerButton))
+	{
+		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			pages.mainPageShouldDisplay = false;
+			pages.registerPageShouldDisplay = true;
+			pages.loginPageShouldDisplay = false;
+			pages.incomeWindowShouldDisplay = false;
+			pages.expensesWindowShouldDisplay = false;
+		}
+		return;
+	}
+	else
+	if (CheckCollisionPointRec(GetMousePosition(), homeButton))
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
@@ -71,14 +103,14 @@ void login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (username.size() < 14))
+		if ((key >= 32) && (key <= 125) && (firstName.size() < 14))
 		{
-			username.push_back((char)key);
+			firstName.push_back((char)key);
 		}
 		if (IsKeyPressed(KEY_BACKSPACE))
 		{
-			if (username.size() > 0)
-				username.pop_back();
+			if (firstName.size() > 0)
+				firstName.pop_back();
 		}
 		return;
 
@@ -89,14 +121,14 @@ void login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (password.size() < 14))
+		if ((key >= 32) && (key <= 125) && (lastName.size() < 14))
 		{
-			password.push_back((char)key);
+			lastName.push_back((char)key);
 		}
 		if (IsKeyPressed(KEY_BACKSPACE))
 		{
-			if (password.size() > 0)
-				password.pop_back();
+			if (lastName.size() > 0)
+				lastName.pop_back();
 		}
 		return;
 	}
@@ -106,7 +138,7 @@ void login::textBoxHandler()
 bool login::loginHandler()
 {
 	bool check = false;
-	std::string fileLine = createFileLine(username, password);
+	std::string fileLine = createFileLine(firstName, lastName);
 	std::fstream loginFile;
 	loginFile.open("../files/login.txt", std::ios::in | std::ios::out);
 	if (checkIfInFile(loginFile, fileLine))

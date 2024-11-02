@@ -4,8 +4,8 @@
 pageBools::pageBools()
 {
     mainPageShouldDisplay = false;
-    registerPageShouldDisplay = true;
-    loginPageShouldDisplay = false;
+    registerPageShouldDisplay = false;
+    loginPageShouldDisplay = true;
     incomeWindowShouldDisplay = false;
     expensesWindowShouldDisplay = false;
 }
