@@ -22,17 +22,19 @@ private:
     Font font;
 
     Rectangle taskbar = { 0, 0, 1440, 70 };
-    Rectangle loginNowButton = { 1330, 23, 80, 30 };
-    Rectangle IandEwindow = { 700, 210, 650, 550 };
+    Rectangle loginNowButton = { 1340, 25, 60, 25 };
+    Rectangle IandEwindow = { 660, 210, 650, 550 };
+
     std::string income = "895.32";
     std::string expenses = "683.67";
-
-    Rectangle incomeWindow = { 200, 210, 400, 550 };
-    Rectangle expensesWindow = { 200, 210, 400, 550 };
-
     std::string enterIncome;
     std::string enterExpense;
-    Rectangle incomeAndExpenseHB = { 265, 465, 270, 20 };
+    std::string date;
+
+    Rectangle incomeWindow = { 130, 210, 400, 550 };
+    Rectangle expensesWindow = { 130, 210, 400, 550 };
+    Rectangle incomeAndExpenseHB = { 195, 465, 270, 20 };
+    Rectangle dateHB = { 195, 545, 270, 20 };
 
     Texture2D plusSign;
     Texture2D backArrowSign;

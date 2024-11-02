@@ -137,7 +137,7 @@ void login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (password.size() < 24))
+		if ((key >= 32) && (key <= 125) && (password.size() < 16))
 		{
 			password.push_back((char)key);
 		}

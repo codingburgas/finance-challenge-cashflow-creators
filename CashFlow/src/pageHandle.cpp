@@ -5,7 +5,7 @@ pageBools::pageBools()
 {
     mainPageShouldDisplay = false;
     registerPageShouldDisplay = false;
-    loginPageShouldDisplay = true;
+    loginPageShouldDisplay = false;
     incomeWindowShouldDisplay = false;
-    expensesWindowShouldDisplay = false;
+    expensesWindowShouldDisplay = true;
 }

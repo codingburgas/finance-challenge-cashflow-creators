@@ -34,7 +34,7 @@ private:
 	Rectangle passwordTextHitbox = { 582, 387, 280, 30 };
 	Rectangle emailText = { 570, 475, 300, 50 };
 	Rectangle emailTextHitbox = { 582, 487, 280, 30 };
-	Rectangle registerButton = { 600, 690, 236, 90 };
+	Rectangle registerButton = { 620, 670, 195, 80 };
 	Rectangle homeButton = { 1330, 23, 70, 30 };
 	Rectangle loginButton = { 800, 800, 120, 20 };
 

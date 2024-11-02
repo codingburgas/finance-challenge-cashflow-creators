@@ -49,10 +49,6 @@ void reg::displayRegisterPage()
 	}
 	else DrawTextEx(font, "Email", { 582, 487 }, 25, 0.7, background);
 
-	if (!checkPassword(password)) {
-		DrawTextEx(font, "Password incompatable", { 582, 530 }, 25, 0.7, MG);
-	}
-
 	//Draw register button
 	DrawTextureEx(regButton, { 535, 600 }, 0, 0.62, WHITE);
 	DrawRectangleLinesEx(regWindow, 0.7, MG);
@@ -64,9 +60,14 @@ void reg::buttonHandler(pageBools& pages)
 	if (CheckCollisionPointRec(GetMousePosition(), registerButton))
 	{
 		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+
+		if (!checkPassword(password)) {
+			DrawTextEx(font, "Password incompatable", { 582, 530 }, 25, 0.7, MG);
+		}
+
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			if (registerHandler())
+			if (registerHandler() && checkValidity(firstName, password, lastName))
 			{
 				pages.mainPageShouldDisplay = true;
 				pages.registerPageShouldDisplay = false;
@@ -146,7 +147,7 @@ void reg::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (password.size() < 24))
+		if ((key >= 32) && (key <= 125) && (password.size() < 16))
 		{
 			password.push_back((char)key);
 		}
@@ -163,6 +164,7 @@ void reg::textBoxHandler()
 bool reg::registerHandler()
 {
 	bool check = false;
+	bool checkValid = false;
 	std::fstream loginFile;
 	loginFile.open("../files/login.txt", std::ios::in | std::ios::out);
 	if (!loginFile)
@@ -171,12 +173,14 @@ bool reg::registerHandler()
 	{
 		std::string fileLine = createFileLine(firstName, lastName, password);
 		check = checkIfInFileLine(loginFile, firstName, lastName);
+		checkValid = checkValidity(firstName, password, lastName);
 		loginFile.close();
 		loginFile.open("../files/login.txt", std::ios::in | std::ios::out | std::ios::app);
-		if (!check)
+		if (!check && checkValid) {
 			writeInFile(loginFile, fileLine);
+			return !check;
+		}
 		loginFile.close();
-		return !check;
 	}
 	return check;
 }
