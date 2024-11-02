@@ -11,13 +11,14 @@ public:
     void displayExpensesWindow();
     void textBoxHandler();
 
-    Texture2D Logo;
-    Vector2 logoPos = { 530, 18 };
-    Vector2 ringCenter = { 680, 60 };
 private:
+    Texture2D Logo;
+    Vector2 logoPos = { 590, 10 };
+    Vector2 ringCenter = { 730, 60 };
     Color background = { 113, 121, 126, 255 };
     Color MG = { 212, 175, 55, 255 };
     Color Gold2 = { 197, 179, 88, 100 };
+    Color customBrown = { 92, 83, 70, 255 };
     Font font;
 
     Rectangle taskbar = { 0, 0, 1440, 70 };

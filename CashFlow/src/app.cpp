@@ -28,7 +28,7 @@ void app::display()
     BeginDrawing();
 
     //Set background color
-    ClearBackground(BLACK);
+    ClearBackground(customBrown);
 
     pageHandler();
 
@@ -48,6 +48,7 @@ void app::pageHandler()
     {
         reg.displayRegisterPage();
         reg.buttonHandler(pageBools);
+        reg.textBoxHandler();
         return;
     }
 
@@ -55,6 +56,7 @@ void app::pageHandler()
     {
         login.displayLoginPage();
         login.buttonHandler(pageBools);
+        login.textBoxHandler();
         return;
     }
 
@@ -80,4 +82,5 @@ void app::pageHandler()
 
 void app::textures() {
     mainMenu.mainMenuTextures();
+    reg.registerPageTextures();
 }

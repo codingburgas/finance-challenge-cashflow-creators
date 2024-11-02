@@ -1,6 +1,8 @@
 #pragma once
 #include "precompile.h"
 #include "pageHandle.h"
+#include "register.h"
+#include "files.h"
 
 class reg {
 public:
@@ -8,19 +10,35 @@ public:
 	void buttonHandler(pageBools& pages);
 	void textBoxHandler();
 	bool registerHandler();
+	void registerPageTextures();
 
-	std::string firstName = "Sam";
-	std::string lastName = "Davidson";
-	std::string email = "samD@gmail.com";
-	std::string phoneNum = "0812356781";
-	float borderThickness = 2;
-	Font customFont = GetFontDefault();
-	Color borderColor = BLACK;
-	Rectangle usernameText = { 820, 415, 280, 45 };
-	Rectangle usernameTextHitbox = { 820, 395, 280, 45 };
-	Rectangle backButton = { 1700, 50, 70, 70 };
-	Rectangle passwordText = { 820, 515, 280, 45 };
-	Rectangle passwordTextHitbox = { 820, 495, 280, 45 };
-	Rectangle registerButton = { 820, 660, 280, 90 };
-	Rectangle Border = { 670, 215, 580, 600 };
+private:
+	Texture2D Logo;
+	Texture2D regButton;
+	Vector2 logoPos = { 590, 10 };
+	Vector2 ringCenter = { 730, 60 };
+	Color background = { 172, 173, 188, 255 };
+	Color MG = { 212, 175, 55, 255 };
+	Color Gold2 = { 197, 179, 88, 100 };
+	Font font;
+	Rectangle taskbar = { 0, 0, 1440, 70 };
+
+	std::string firstName;
+	std::string lastName;
+	std::string email;
+	std::string phoneNum;
+
+	Rectangle usernameText = { 570, 275, 300, 50 };
+	Rectangle usernameTextHitbox = { 582, 287, 280, 30 };
+	Rectangle passwordText = { 570, 375, 300, 50 };
+	Rectangle passwordTextHitbox = { 582, 387, 280, 30 };
+	Rectangle emailText = { 570, 475, 300, 50 };
+	Rectangle emailTextHitbox = { 582, 487, 280, 30 };
+	Rectangle registerButton = { 600, 690, 236, 90 };
+	Rectangle homeButton = { 1330, 23, 70, 30 };
+
+	Rectangle regWindow = { 420, 180, 600, 670 };
+	Color customBrown = { 92, 83, 70, 255 };
+
+	float hitBoxX = 580;
 };

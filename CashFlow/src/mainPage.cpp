@@ -3,7 +3,7 @@
 #include "../lib/pageHandle.h"
 
 void mainMenu::mainMenuTextures() {
-    Logo = LoadTexture("assets/CFlogo-removebg-preview.png");
+    Logo = LoadTexture("assets/cfGlobe.png");
     font = LoadFont("assets/LuxuriousRoman-Regular.ttf");
     plusSign = LoadTexture("assets/plusSign.png");
     backArrowSign = LoadTexture("assets/backArrowSign.png");
@@ -11,14 +11,17 @@ void mainMenu::mainMenuTextures() {
 }
 
 void mainMenu::displayMainMenu() {
+    DrawTextEx(font, "     Welcome to\nCashFlow Banking!", { 230, 380 }, 48, 0.7, MG);
+
     //TaskBar
-    DrawTextureEx(Logo, logoPos, 0, 0.35, WHITE);
-    DrawRectangle(0, 0, 680, 40, MG);
-    DrawRectangle(680, 0, 850, 75, MG);
-    DrawRing(ringCenter, 20, -8.5, 180, 0, 300, BLACK);
+    DrawRectangle(0, 0, 730, 40, MG);
+    DrawRectangle(730, 0, 900, 75, MG);
+    DrawRing(ringCenter, 20, -8.5, 180, 0, 300, customBrown);
+    DrawTextureEx(Logo, logoPos, 0, 0.4, WHITE);
     DrawTextEx(font, "Log In", { 1330, 23 }, 32, 0.7, BLACK);
 
     //Income and Expenses Window
+    DrawRectangleRec(IandEwindow, BLACK);
     DrawRectangleLinesEx (IandEwindow, 0.7, MG);
 
     DrawTextEx(font, "Monthly\n Income: ", { 820, 240 }, 35, 0.7, MG);
@@ -34,6 +37,7 @@ void mainMenu::displayMainMenu() {
 }
 
 void mainMenu::displayIncomeWindow() {
+    DrawRectangleRec(incomeWindow, BLACK);
     DrawRectangleLinesEx(incomeWindow, 0.7, MG);
     DrawTextEx(font, "Add Income", { 325, 230 }, 35, 0.7, MG);
     DrawTextEx(font, "Add Expense", { 360, 720 }, 20, 0.7, MG);
@@ -46,11 +50,12 @@ void mainMenu::displayIncomeWindow() {
     {
         DrawTextEx(font, enterIncome.c_str(), { 262, 462 }, 25, 0.7, MG);
     }
-    else DrawTextEx(font, "Enter Income", { 262, 462 }, 25, 0.7, Gold2);
+    else DrawTextEx(font, "Enter Income", { 262, 462 }, 25, 0.7, background);
 }
 
 
 void mainMenu::displayExpensesWindow() {
+    DrawRectangleRec(expensesWindow, BLACK);
     DrawRectangleLinesEx(expensesWindow, 0.7, MG);
     DrawTextEx(font, "Add Expenses", { 310, 230 }, 35, 0.7, MG);
     DrawTextEx(font, "Track your monthly expenses\n           with CashFlow!", { 218, 320 }, 32, 0.7, MG);
@@ -63,7 +68,7 @@ void mainMenu::displayExpensesWindow() {
     {
         DrawTextEx(font, enterIncome.c_str(), { 262, 462 }, 25, 0.7, MG);
     }
-    else DrawTextEx(font, "Enter Expense", { 262, 462 }, 25, 0.7, Gold2);
+    else DrawTextEx(font, "Enter Expense", { 262, 462 }, 25, 0.7, background);
 }
 
 void mainMenu::textBoxHandler() {
@@ -155,8 +160,8 @@ void mainMenu::buttonHandler(pageBools& pages)
          SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
          if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
              pages.mainPageShouldDisplay = false;
-             pages.registerPageShouldDisplay = false;
-             pages.loginPageShouldDisplay = true;
+             pages.registerPageShouldDisplay = true;
+             pages.loginPageShouldDisplay = false;
              pages.incomeWindowShouldDisplay = false;
              pages.expensesWindowShouldDisplay = false;
          }

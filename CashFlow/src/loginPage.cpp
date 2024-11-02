@@ -42,11 +42,11 @@ void login::buttonHandler(pageBools& pages)
 		{
 			if (loginHandler())
 			{
-				pages.mainMenuShouldDisplay = false;
+				pages.mainPageShouldDisplay = true;
 				pages.registerPageShouldDisplay = false;
 				pages.loginPageShouldDisplay = false;
-				pages.preTestPageShouldDisplay = true;
-				pages.testPageShouldDisplay = false;
+				pages.incomeWindowShouldDisplay = false;
+				pages.expensesWindowShouldDisplay = false;
 			}
 		}
 	}
@@ -55,11 +55,11 @@ void login::buttonHandler(pageBools& pages)
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			pages.mainMenuShouldDisplay = true;
+			pages.mainPageShouldDisplay = true;
 			pages.registerPageShouldDisplay = false;
 			pages.loginPageShouldDisplay = false;
-			pages.preTestPageShouldDisplay = false;
-			pages.testPageShouldDisplay = false;
+			pages.incomeWindowShouldDisplay = false;
+			pages.expensesWindowShouldDisplay = false;
 		}
 	}
 }
