@@ -3,6 +3,7 @@
 #include "pageHandle.h"
 #include "files.h"
 #include "login.h"
+#include "register.h"
 
 class login {
 public:

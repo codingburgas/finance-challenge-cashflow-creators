@@ -20,38 +20,35 @@ bool isValidNumber(std::string& str) {
     return true;
 }
 
-float totalIncome = 0.0f, totalExpense = 0.0f, tBalance = 0.0f;
-std::string income, expenses, balance;
 
-void calculateBalance(std::string& enterIncome, std::string& enterExpense, float& enteredIncome, float& enteredExpense, float& totalIncome, float& totalExpense, float& tBalance) {
+void calculateBalance(float& totalIncome, float& totalExpense, float& tBalance, std::string balance) {
+   
+        tBalance = totalIncome - totalExpense;
+
+        std::ostringstream oss;
+        oss << std::fixed << std::setprecision(2);
+
+        oss.str("");
+        oss << tBalance;
+        balance = oss.str();
+
+}
+
+void calculateIncome(std::string& entIncome, std::string income, float& enteredIncome, float& totalIncome) {
     try {
-        if (isValidNumber(enterIncome) && isValidNumber(enterExpense)) {
-            enteredIncome = std::stof(enterIncome); 
-            enteredExpense = std::stof(enterExpense);
+        if (isValidNumber(entIncome)) {
+            enteredIncome = std::stof(entIncome);
         }
         else {
             throw std::invalid_argument("Non-numeric input.");
         }
 
         totalIncome += enteredIncome;
-        totalExpense += enteredExpense;
-        tBalance = totalIncome - totalExpense;
 
         std::ostringstream oss;
-        oss << std::fixed << std::setprecision(2);
-
         oss.str("");  // Clear the stream
         oss << totalIncome;
         income = oss.str();
-
-        oss.str("");
-        oss << totalExpense;
-        expenses = oss.str();
-
-        oss.str("");
-        oss << tBalance;
-        balance = oss.str();
-
     }
     catch (const std::invalid_argument& e) {
         std::cerr << "Invalid input: " << e.what() << std::endl;
@@ -59,4 +56,71 @@ void calculateBalance(std::string& enterIncome, std::string& enterExpense, float
     catch (const std::out_of_range& e) {
         std::cerr << "Input number is out of range." << std::endl;
     }
+}
+
+void calculateExpenses(std::string& entExpense,std::string expense, float& enteredExpense, float& totalExpense) {
+    try {
+        if (isValidNumber(entExpense)) {
+            enteredExpense = std::stof(entExpense);
+        }
+        else {
+            throw std::invalid_argument("Non-numeric input.");
+        }
+
+        totalExpense += enteredExpense;
+
+        std::ostringstream oss;
+        oss.str("");  // Clear the stream
+        oss << totalExpense;
+        expense = oss.str();
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr << "Invalid input: " << e.what() << std::endl;
+    }
+    catch (const std::out_of_range& e) {
+        std::cerr << "Input number is out of range." << std::endl;
+    }
+}
+
+void saveIncomeExpense(const std::string& firstName, const std::string& lastName, float& income, float& expense) {
+    std::fstream dataFile;
+    dataFile.open("../files/data.txt", std::ios::in | std::ios::out | std::ios::app);
+    if (!dataFile) {
+        std::cout << "data.txt failed to load!" << std::endl;
+        return;
+    }
+
+    // Write data in a specific format
+    dataFile << firstName << " " << lastName << ": "
+        << "Income = " << std::fixed << std::setprecision(2) << income << " "
+        << "Expense = " << std::fixed << std::setprecision(2) << expense << std::endl;
+
+    dataFile.close();
+}
+
+bool retrieveIncomeExpense(const std::string& firstName, const std::string& lastName, float& income, float& expense) {
+    std::fstream dataFile("../files/data.txt", std::ios::in);
+    if (!dataFile) {
+        std::cout << "data.txt failed to load!" << std::endl;
+        return false;
+    }
+
+    std::string line;
+    std::string fullName = firstName + " " + lastName + ":";
+    while (std::getline(dataFile, line)) {
+        if (line.find(fullName) != std::string::npos) {
+            // Parse the income and expense from the line
+            size_t incomePos = line.find("Income=");
+            size_t expensePos = line.find("Expense=");
+
+            if (incomePos != std::string::npos && expensePos != std::string::npos) {
+                income = std::stof(line.substr(incomePos + 7, expensePos - (incomePos + 7)));
+                expense = std::stof(line.substr(expensePos + 8));
+                dataFile.close();
+                return true;
+            }
+        }
+    }
+    dataFile.close();
+    return false;  // Entry not found
 }

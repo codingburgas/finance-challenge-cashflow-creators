@@ -4,6 +4,6 @@
 std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword)
 {
     std::string inputLine;
-    inputLine = loginFirstName + " " + loginPassword;
+    inputLine = loginFirstName + " " + loginPassword + " " + loginPassword;
     return inputLine;
 }

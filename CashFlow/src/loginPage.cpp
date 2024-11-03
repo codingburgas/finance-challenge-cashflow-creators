@@ -57,6 +57,11 @@ void login::buttonHandler(pageBools& pages)
 	if (CheckCollisionPointRec(GetMousePosition(), loginButton))
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			
+		if (!checkPassword(password)) {
+			DrawTextEx(font, "Password incompatable", { 582, 530 }, 25, 0.7, MG);
+		}
+
 		{
 			if (loginHandler())
 			{

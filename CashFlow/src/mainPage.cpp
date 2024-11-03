@@ -31,14 +31,29 @@ void mainMenu::displayMainMenu() {
 
     DrawRing({ 840, 500 }, 120, 123, 0, 360, 360, MG);
     DrawRing({ 1140, 500 }, 120, 123, 0, 360, 360, MG);
-    DrawTextEx(font, income.c_str(), { 805, 480 }, 32, 0.7, MG);
-    DrawTextEx(font, expenses.c_str(), { 1105, 480 }, 32, 0.7, MG);
+    DrawCenteredText(income, { 850, 500 }, 40, MG, font);
+    DrawCenteredText(expenses, { 1150, 500 }, 40, MG, font);
 
     //Add income and expense button
     DrawTextureEx(plusSign, { 1190, 640 }, 0, 0.25, WHITE);
 }
 
+void mainMenu::DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font) {
+    int textWidth = MeasureText(text.c_str(), fontSize);
+    int textHeight = fontSize;  // Approximate height by font size
 
+    // Calculate the top-left corner position of the text to center it
+    Vector2 textPosition = {
+        centerPoint.x - textWidth / 2,
+        centerPoint.y - textHeight / 2
+    };
+
+    // Draw the text centered on the centerPoint
+    DrawTextEx(font, text.c_str(), { textPosition.x, textPosition.y }, fontSize, 0.7, color);
+}
+
+
+//INCOME WINDOW
 void mainMenu::displayIncomeWindow() {
     DrawRectangleRec(incomeWindow, BLACK);
     DrawRectangleLinesEx(incomeWindow, 0.7, MG);
@@ -67,6 +82,7 @@ void mainMenu::displayIncomeWindow() {
 }
 
 
+//EXPENSE WINDOW
 void mainMenu::displayExpensesWindow() {
     DrawRectangleRec(expensesWindow, BLACK);
     DrawRectangleLinesEx(expensesWindow, 0.7, MG);
@@ -164,7 +180,7 @@ void mainMenu::buttonHandler(pageBools& pages)
     }
 
 
-        //expenses window buttons
+        //Buttons for income window
     if (CheckCollisionPointRec(GetMousePosition(), { 290, 718, 100, 20 }))
     {
         if (pages.expensesWindowShouldDisplay == false) {
@@ -183,13 +199,19 @@ void mainMenu::buttonHandler(pageBools& pages)
         if (pages.expensesWindowShouldDisplay == false) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                calculateBalance(entIncome, entExpense, enteredIncome, enteredExpense, totalIncome, totalExpense, tBalance);
+                calculateIncome(entIncome, income, enteredIncome, totalIncome);
+                entIncome = "";
+                std::ostringstream oss;
+                oss.str("");  // Clear the stream
+                oss << totalIncome;
+                income = oss.str();
+                saveIncomeExpense(reg.firstName, reg.lastName, totalIncome, totalExpense);
             }
         }
     }
        
 
-    //income window button
+    //Buttons for expense window
         if (CheckCollisionPointRec(GetMousePosition(), { 450, 695, 55, 40 }))
         {
             if (pages.incomeWindowShouldDisplay == false) {

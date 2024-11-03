@@ -11,6 +11,10 @@ public:
 	void textBoxHandler();
 	bool registerHandler();
 	void registerPageTextures();
+	std::string firstName;
+	std::string lastName;
+	std::string email;
+	std::string password;
 
 private:
 	Texture2D Logo;
@@ -23,10 +27,6 @@ private:
 	Font font;
 	Rectangle taskbar = { 0, 0, 1440, 70 };
 
-	std::string firstName;
-	std::string lastName;
-	std::string email;
-	std::string password;
 
 	Rectangle usernameText = { 570, 275, 300, 50 };
 	Rectangle usernameTextHitbox = { 582, 287, 280, 30 };

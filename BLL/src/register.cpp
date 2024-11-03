@@ -38,12 +38,24 @@ bool checkValidity(std::string firstName, std::string registerPassword, std::str
 
 bool checkFirstName(std::string firstName)
 {
-    return !(firstName.find(' ') != std::string::npos);
+    bool checkSize = false;
+    bool checkSpaces = false;
+    bool check = false;
+    if (firstName.size() > 0) checkSize = true;
+    if (firstName.find(' ') != std::string::npos) checkSpaces = true;
+    if (checkSize && checkSpaces) check = true;
+    return check;
 }
 
 bool checkLastName(std::string lastName)
 {
-    return !(lastName.find(' ') != std::string::npos);
+    bool checkSize = false;
+    bool checkSpaces = false;
+    bool check = false;
+    if (lastName.size() > 0) checkSize = true;
+    if (lastName.find(' ') != std::string::npos) checkSpaces = true;
+    if (checkSize && checkSpaces) check = true;
+    return check;
 }
 
 std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword)

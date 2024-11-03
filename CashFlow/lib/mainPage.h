@@ -2,6 +2,7 @@
 #include "precompile.h"
 #include "pageHandle.h"
 #include "balance.h"
+#include "registerPage.h"
 
 class mainMenu {
 public:
@@ -11,6 +12,7 @@ public:
     void displayIncomeWindow();
     void displayExpensesWindow();
     void textBoxHandler(pageBools& pages);
+    void DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font);
 
 private:
     Texture2D Logo;
@@ -26,8 +28,8 @@ private:
     Rectangle loginNowButton = { 1340, 25, 60, 25 };
     Rectangle IandEwindow = { 660, 210, 650, 550 };
 
-    std::string income;
-    std::string expenses;
+    std::string income = "0";
+    std::string expenses = "0";
     std::string entIncome;
     std::string entExpense;
     std::string date;
@@ -47,4 +49,5 @@ private:
     Texture2D backArrowSign;
     Texture2D closeWinSign;
 
+    reg reg;
 };
