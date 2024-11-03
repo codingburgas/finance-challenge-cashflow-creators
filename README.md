@@ -24,11 +24,9 @@ Our project is a banking application built in C++ that allows users to create ac
 
 ## 📄 Documentation <a name="docs"></a>
 
-<img src="https://img.icons8.com/fluency/48/000000/microsoft-word-2019.png" alt="MS Word logo" width=20px />[Documentation](#)
+<img src="https://img.icons8.com/fluency/48/000000/microsoft-word-2019.png" alt="MS Word logo" width=20px />[Documentation](https://github.com/codingburgas/finance-challenge-cashflow-creators/raw/refs/heads/main/CashFLow%20documentation/Documentation%20CashFlow%20Creators.docx)
 
-<img src="https://img.icons8.com/fluency/48/000000/microsoft-powerpoint-2019.png" alt="MS PowerPoint logo" width=20px >[Presentation](#)
-
-<img src="https://img.icons8.com/fluency/48/000000/microsoft-excel-2019.png" alt="MS Excel logo" width=20px >[QA](#)
+<img src="https://img.icons8.com/fluency/48/000000/microsoft-powerpoint-2019.png" alt="MS PowerPoint logo" width=20px >[Presentation](https://github.com/codingburgas/finance-challenge-cashflow-creators/raw/refs/heads/main/CashFLow%20documentation/CashFlow%20Creators.pptx)
 
 ![----------------------------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
  
