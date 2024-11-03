@@ -1,9 +1,9 @@
 #pragma once
 #include "precompile.h"
 
-class pageBools {
+class PageBools {
 public:
-    pageBools();
+    PageBools();
     bool mainPageShouldDisplay;
     bool registerPageShouldDisplay;
     bool loginPageShouldDisplay;

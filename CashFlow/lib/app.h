@@ -5,15 +5,15 @@
 #include "loginPage.h"
 #include "registerPage.h"
 
-class displayRes {
+class DisplayRes {
 public:
     int width = 1440; //GetScreenWidth();
     int height = 900; //GetScreenHeight();
 };
 
-class app {
+class App {
 public:
-    app();
+    App();
     void display();
     void update();
     void pageHandler();
@@ -25,9 +25,9 @@ public:
     int userCharCount = 0;
     char password[15] = "\0";
     int passCharCount = 0;
-    displayRes screen;
-    pageBools pageBools;
-    mainMenu mainMenu;
-    login login;
-    reg reg;
+    DisplayRes screen;
+    PageBools pageBools;
+    MainMenu mainMenu;
+    Login login;
+    Reg reg;
 };

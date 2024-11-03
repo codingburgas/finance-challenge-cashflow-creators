@@ -4,19 +4,18 @@
 #include "files.h"
 #include "login.h"
 #include "register.h"
-#include "mainPage.h"
 
-class login {
+class Login {
 public:
 	void displayLoginPage();
 	void textBoxHandler();
-	void buttonHandler(pageBools& pages);
+	void buttonHandler(PageBools& pages);
 	bool loginHandler();
 	void loginPageTextures();
-	std::string logFirstName = "Sam";
-	std::string logLastName = "Davidso";
-	std::string logPassword = "Sam562@";
-	bool loginSuccess = false;
+	std::string logFirstName = "";
+	std::string logLastName = "";
+	std::string logPassword = "";
+	bool loginSuccess = true;
 
 private:
 	Texture2D Logo;
@@ -42,5 +41,4 @@ private:
 
 	Rectangle loginWindow = { 420, 180, 600, 670 };
 	Color customBrown = { 92, 83, 70, 255 };
-	mainMenu main;
 };

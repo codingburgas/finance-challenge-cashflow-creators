@@ -1,6 +1,6 @@
 #include "app.h"
 
-app::app()
+App::App()
 {
     //Initialize main app screen
     InitWindow(screen.width, screen.height, "app");
@@ -10,7 +10,7 @@ app::app()
 
 }
 
-void app::update()
+void App::update()
 {
     textures();
 
@@ -23,7 +23,7 @@ void app::update()
 
 }
 
-void app::display()
+void App::display()
 {
     BeginDrawing();
 
@@ -35,7 +35,7 @@ void app::display()
     EndDrawing();
 }
 
-void app::pageHandler()
+void App::pageHandler()
 {
     if (pageBools.mainPageShouldDisplay)
     {
@@ -80,7 +80,7 @@ void app::pageHandler()
 
 }
 
-void app::textures() {
+void App::textures() {
     mainMenu.mainMenuTextures();
     reg.registerPageTextures();
     login.loginPageTextures();

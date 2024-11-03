@@ -3,18 +3,19 @@
 #include "pageHandle.h"
 #include "balance.h"
 #include "registerPage.h"
+#include "loginPage.h"
 
-class mainMenu {
+class MainMenu {
 public:
     void mainMenuTextures();
     void displayMainMenu();
-    void buttonHandler(pageBools& pages);
+    void buttonHandler(PageBools& pages);
     void displayIncomeWindow();
     void displayExpensesWindow();
-    void textBoxHandler(pageBools& pages);
+    void textBoxHandler(PageBools& pages);
     void DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font);
-    std::string income;
-    std::string expenses;
+    std::string income = "0";
+    std::string expenses = "0";
     float totalIncome = 0;
     float totalExpense = 0;
 
@@ -49,5 +50,6 @@ private:
     Texture2D backArrowSign;
     Texture2D closeWinSign;
 
-    reg reg;
+    Reg reg;
+    Login login;
 };

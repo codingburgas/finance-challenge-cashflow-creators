@@ -2,13 +2,13 @@
 #include "../lib/pageHandle.h"
 #include "../lib/registerPage.h"
 
-void reg::registerPageTextures() {
+void Reg::registerPageTextures() {
 	Logo = LoadTexture("assets/cfGlobe.png");
 	font = LoadFont("assets/LuxuriousRoman-Regular.ttf");
 	regButton = LoadTexture("assets/register.png");
 }
 
-void reg::displayRegisterPage()
+void Reg::displayRegisterPage()
 {
 	//TaskBar
 	DrawRectangle(0, 0, 730, 40, MG);
@@ -54,7 +54,7 @@ void reg::displayRegisterPage()
 	DrawRectangleLinesEx(regWindow, 0.7, MG);
 }
 
-void reg::buttonHandler(pageBools& pages)
+void Reg::buttonHandler(PageBools& pages)
 {
 	//register button
 	if (CheckCollisionPointRec(GetMousePosition(), registerButton))
@@ -109,7 +109,7 @@ void reg::buttonHandler(pageBools& pages)
 	}
 }
 
-void reg::textBoxHandler()
+void Reg::textBoxHandler()
 {
 	if (CheckCollisionPointRec(GetMousePosition(), firstNameTextHitbox))
 	{
@@ -161,7 +161,7 @@ void reg::textBoxHandler()
 	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
 
-bool reg::registerHandler()
+bool Reg::registerHandler()
 {
 	bool check = false;
 	bool checkValid = false;

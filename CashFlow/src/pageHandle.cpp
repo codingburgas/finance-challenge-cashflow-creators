@@ -1,7 +1,7 @@
 #include "precompile.h"
 #include "pageHandle.h"
 
-pageBools::pageBools()
+PageBools::PageBools()
 {
     mainPageShouldDisplay = false;
     registerPageShouldDisplay = false;

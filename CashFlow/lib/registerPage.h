@@ -4,10 +4,10 @@
 #include "register.h"
 #include "files.h"
 
-class reg {
+class Reg {
 public:
 	void displayRegisterPage();
-	void buttonHandler(pageBools& pages);
+	void buttonHandler(PageBools& pages);
 	void textBoxHandler();
 	bool registerHandler();
 	void registerPageTextures();

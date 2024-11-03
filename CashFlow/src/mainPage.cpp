@@ -2,7 +2,7 @@
 #include "../lib/mainPage.h"
 #include "../lib/pageHandle.h"
 
-void mainMenu::mainMenuTextures() {
+void MainMenu::mainMenuTextures() {
     Logo = LoadTexture("assets/cfGlobe.png");
     font = LoadFont("assets/LuxuriousRoman-Regular.ttf");
     plusSign = LoadTexture("assets/plusSign.png");
@@ -11,7 +11,7 @@ void mainMenu::mainMenuTextures() {
 }
 
 
-void mainMenu::displayMainMenu() {
+void MainMenu::displayMainMenu() {
     DrawTextEx(font, "     Welcome to\nCashFlow Banking!", { 160, 380 }, 48, 0.7, MG);
 
     //TaskBar
@@ -38,7 +38,7 @@ void mainMenu::displayMainMenu() {
     DrawTextureEx(plusSign, { 1190, 640 }, 0, 0.25, WHITE);
 }
 
-void mainMenu::DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font) {
+void MainMenu::DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font) {
     int textWidth = MeasureText(text.c_str(), fontSize);
     int textHeight = fontSize;  // Approximate height by font size
 
@@ -54,7 +54,7 @@ void mainMenu::DrawCenteredText(std::string& text, Vector2 centerPoint, int font
 
 
 //INCOME WINDOW
-void mainMenu::displayIncomeWindow() {
+void MainMenu::displayIncomeWindow() {
     DrawRectangleRec(incomeWindow, BLACK);
     DrawRectangleLinesEx(incomeWindow, 0.7, MG);
     DrawTextEx(font, "Add Income", { 245, 230 }, 35, 0.7, MG);
@@ -83,7 +83,7 @@ void mainMenu::displayIncomeWindow() {
 
 
 //EXPENSE WINDOW
-void mainMenu::displayExpensesWindow() {
+void MainMenu::displayExpensesWindow() {
     DrawRectangleRec(expensesWindow, BLACK);
     DrawRectangleLinesEx(expensesWindow, 0.7, MG);
     DrawTextEx(font, "Add Expenses", { 240, 230 }, 35, 0.7, MG);
@@ -112,7 +112,7 @@ void mainMenu::displayExpensesWindow() {
 }
 
 
-void mainMenu::textBoxHandler(pageBools& pages) {
+void MainMenu::textBoxHandler(PageBools& pages) {
     if (CheckCollisionPointRec(GetMousePosition(), incomeAndExpenseHB))
     {
         SetMouseCursor(MOUSE_CURSOR_IBEAM);
@@ -164,7 +164,7 @@ void mainMenu::textBoxHandler(pageBools& pages) {
 
 
 
-void mainMenu::buttonHandler(pageBools& pages)
+void MainMenu::buttonHandler(PageBools& pages)
 {
     //income and expenses window button
     if (CheckCollisionPointRec(GetMousePosition(), { 1220, 670, 65, 65 }))
@@ -176,6 +176,17 @@ void mainMenu::buttonHandler(pageBools& pages)
             pages.loginPageShouldDisplay = false;
             pages.incomeWindowShouldDisplay = true;
             pages.expensesWindowShouldDisplay = false;
+            if (login.loginSuccess) {
+                // Call retrieveIncomeExpense and check its return value
+                if (retrieveIncomeExpense(login.logFirstName, login.logLastName, income, expenses, totalIncome, totalExpense)) {
+                    std::cout << "Successfuly retrieved income and expenses" << std::endl;
+                    login.loginSuccess = false;
+                }
+                else {
+                    // Handle the failure case, such as displaying an error message
+                    std::cout << "Failed to retrieve income and expenses." << std::endl;
+                }
+            }
         }
     }
 
@@ -223,6 +234,22 @@ void mainMenu::buttonHandler(pageBools& pages)
                      pages.incomeWindowShouldDisplay = true;
                      pages.expensesWindowShouldDisplay = false;
                  }
+            }
+        }
+        
+        if (CheckCollisionPointRec(GetMousePosition(), { 160, 670, 65, 65 }))
+        {
+            if (pages.expensesWindowShouldDisplay && !pages.incomeWindowShouldDisplay) {
+                SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    calculateExpenses(entExpense, expenses, enteredExpense, totalExpense);
+                    entIncome = "";
+                    std::ostringstream oss;
+                    oss.str("");  // Clear the stream
+                    oss << totalIncome;
+                    income = oss.str();
+                    saveIncomeExpense(reg.firstName, reg.lastName, totalIncome, totalExpense);
+                }
             }
         }
 

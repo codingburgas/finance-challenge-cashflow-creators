@@ -3,5 +3,5 @@
 
 int main()
 {
-    app app;
+    App App;
 }

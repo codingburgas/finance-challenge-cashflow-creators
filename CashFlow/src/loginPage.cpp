@@ -1,13 +1,13 @@
 #include "../lib/precompile.h"
 #include "../lib/loginPage.h"
 
-void login::loginPageTextures() {
+void Login::loginPageTextures() {
 	Logo = LoadTexture("assets/cfGlobe.png");
 	font = LoadFont("assets/LuxuriousRoman-Regular.ttf");
 	loginBtn = LoadTexture("assets/loginBtn.png");
 }
 
-void login::displayLoginPage()
+void Login::displayLoginPage()
 {
 	//TaskBar
 	DrawRectangle(0, 0, 730, 40, MG);
@@ -53,7 +53,7 @@ void login::displayLoginPage()
 
 
 
-void login::textBoxHandler()
+void Login::textBoxHandler()
 {
 	//username textbox
 	if (CheckCollisionPointRec(GetMousePosition(), usernameTextHitbox))
@@ -108,7 +108,7 @@ void login::textBoxHandler()
 	SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
 
-void login::buttonHandler(pageBools& pages)
+void Login::buttonHandler(PageBools& pages)
 {
 	if (CheckCollisionPointRec(GetMousePosition(), loginButton)) 
 	{
@@ -124,17 +124,7 @@ void login::buttonHandler(pageBools& pages)
 				pages.loginPageShouldDisplay = false;
 				pages.incomeWindowShouldDisplay = false;
 				pages.expensesWindowShouldDisplay = false;
-				if (loginSuccess) {
-					// Call retrieveIncomeExpense and check its return value
-					if (retrieveIncomeExpense(logFirstName, logLastName, main.income, main.expenses, main.totalIncome, main.totalExpense)) {
-						std::cout << "Successfuly retrieved income and expenses" << std::endl;
-						loginSuccess = false;
-					}
-					else {
-						// Handle the failure case, such as displaying an error message
-						std::cout << "Failed to retrieve income and expenses." << std::endl;
-					}
-				}
+				
 			}
 		}
 	}
@@ -166,7 +156,7 @@ void login::buttonHandler(pageBools& pages)
 	}
 }
 
-bool login::loginHandler()
+bool Login::loginHandler()
 {
 	bool check = false;
 	std::string fileLine = createLoginFileLine(logFirstName, logLastName, logPassword);
