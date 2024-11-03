@@ -11,4 +11,4 @@ void calculateExpenses(std::string& enterExpense, std::string expense, float& en
 
 void saveIncomeExpense(const std::string& firstName, const std::string& lastName, float& income, float& expense);
 
-bool retrieveIncomeExpense(const std::string& firstName, const std::string& lastName, float& income, float& expense);
+bool retrieveIncomeExpense(const std::string& firstName, const std::string& lastName, std::string& income, std::string& expenses, float& totalIncome, float& totalExpense);

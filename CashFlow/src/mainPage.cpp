@@ -183,7 +183,7 @@ void mainMenu::buttonHandler(pageBools& pages)
         //Buttons for income window
     if (CheckCollisionPointRec(GetMousePosition(), { 290, 718, 100, 20 }))
     {
-        if (pages.expensesWindowShouldDisplay == false) {
+        if (!pages.expensesWindowShouldDisplay && pages.incomeWindowShouldDisplay) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 pages.mainPageShouldDisplay = false;
@@ -196,7 +196,7 @@ void mainMenu::buttonHandler(pageBools& pages)
     }
     if (CheckCollisionPointRec(GetMousePosition(), { 160, 670, 65, 65 }))
     {
-        if (pages.expensesWindowShouldDisplay == false) {
+        if (!pages.expensesWindowShouldDisplay && pages.incomeWindowShouldDisplay) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 calculateIncome(entIncome, income, enteredIncome, totalIncome);
@@ -214,7 +214,7 @@ void mainMenu::buttonHandler(pageBools& pages)
     //Buttons for expense window
         if (CheckCollisionPointRec(GetMousePosition(), { 450, 695, 55, 40 }))
         {
-            if (pages.incomeWindowShouldDisplay == false) {
+            if (!pages.incomeWindowShouldDisplay && pages.expensesWindowShouldDisplay) {
                  SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                  if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                      pages.mainPageShouldDisplay = false;
@@ -230,7 +230,7 @@ void mainMenu::buttonHandler(pageBools& pages)
     //close window button
         if (CheckCollisionPointRec(GetMousePosition(), { 475, 225, 30, 30 }))
         {
-            if (pages.mainPageShouldDisplay == false) {
+            if (!pages.mainPageShouldDisplay) {
                  SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                  if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                      pages.mainPageShouldDisplay = true;

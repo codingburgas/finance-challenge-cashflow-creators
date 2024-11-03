@@ -4,6 +4,7 @@
 #include "files.h"
 #include "login.h"
 #include "register.h"
+#include "mainPage.h"
 
 class login {
 public:
@@ -12,6 +13,10 @@ public:
 	void buttonHandler(pageBools& pages);
 	bool loginHandler();
 	void loginPageTextures();
+	std::string logFirstName = "Sam";
+	std::string logLastName = "Davidso";
+	std::string logPassword = "Sam562@";
+	bool loginSuccess = false;
 
 private:
 	Texture2D Logo;
@@ -24,10 +29,6 @@ private:
 	Font font;
 	Rectangle taskbar = { 0, 0, 1440, 70 };
 
-	std::string firstName;
-	std::string lastName;
-	std::string email;
-	std::string password;
 
 	Rectangle usernameText = { 570, 275, 300, 50 };
 	Rectangle usernameTextHitbox = { 582, 287, 280, 30 };
@@ -35,11 +36,11 @@ private:
 	Rectangle passwordTextHitbox = { 582, 387, 280, 30 };
 	Rectangle emailText = { 570, 475, 300, 50 };
 	Rectangle emailTextHitbox = { 582, 487, 280, 30 };
-	Rectangle loginButton = { 535, 600, 236, 90 };
+	Rectangle loginButton = { 620, 670, 195, 80 };
 	Rectangle homeButton = { 1330, 23, 70, 30 };
 	Rectangle registerButton = { 790, 800, 140, 20 };
 
 	Rectangle loginWindow = { 420, 180, 600, 670 };
 	Color customBrown = { 92, 83, 70, 255 };
-
+	mainMenu main;
 };

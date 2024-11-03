@@ -29,11 +29,11 @@ private:
 
 
 	Rectangle usernameText = { 570, 275, 300, 50 };
-	Rectangle usernameTextHitbox = { 582, 287, 280, 30 };
+	Rectangle firstNameTextHitbox = { 582, 287, 280, 30 };
 	Rectangle passwordText = { 570, 375, 300, 50 };
-	Rectangle passwordTextHitbox = { 582, 387, 280, 30 };
+	Rectangle lastNameTextHitbox = { 582, 387, 280, 30 };
 	Rectangle emailText = { 570, 475, 300, 50 };
-	Rectangle emailTextHitbox = { 582, 487, 280, 30 };
+	Rectangle passwordTextHitbox = { 582, 487, 280, 30 };
 	Rectangle registerButton = { 620, 670, 195, 80 };
 	Rectangle homeButton = { 1330, 23, 70, 30 };
 	Rectangle loginButton = { 800, 800, 120, 20 };

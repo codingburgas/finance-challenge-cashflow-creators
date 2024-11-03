@@ -47,7 +47,7 @@ void reg::displayRegisterPage()
 	{
 		DrawTextEx(font, password.c_str(), { 582, 487 }, 25, 0.7, MG);
 	}
-	else DrawTextEx(font, "Email", { 582, 487 }, 25, 0.7, background);
+	else DrawTextEx(font, "Password", { 582, 487 }, 25, 0.7, background);
 
 	//Draw register button
 	DrawTextureEx(regButton, { 535, 600 }, 0, 0.62, WHITE);
@@ -111,7 +111,7 @@ void reg::buttonHandler(pageBools& pages)
 
 void reg::textBoxHandler()
 {
-	if (CheckCollisionPointRec(GetMousePosition(), usernameTextHitbox))
+	if (CheckCollisionPointRec(GetMousePosition(), firstNameTextHitbox))
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
@@ -127,7 +127,7 @@ void reg::textBoxHandler()
 		return;
 	}
 
-	if (CheckCollisionPointRec(GetMousePosition(), passwordTextHitbox))
+	if (CheckCollisionPointRec(GetMousePosition(), lastNameTextHitbox))
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
@@ -143,7 +143,7 @@ void reg::textBoxHandler()
 		return;
 	}
 
-	if (CheckCollisionPointRec(GetMousePosition(), emailTextHitbox))
+	if (CheckCollisionPointRec(GetMousePosition(), passwordTextHitbox))
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();

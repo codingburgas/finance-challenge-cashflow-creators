@@ -13,6 +13,10 @@ public:
     void displayExpensesWindow();
     void textBoxHandler(pageBools& pages);
     void DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font);
+    std::string income;
+    std::string expenses;
+    float totalIncome = 0;
+    float totalExpense = 0;
 
 private:
     Texture2D Logo;
@@ -28,16 +32,12 @@ private:
     Rectangle loginNowButton = { 1340, 25, 60, 25 };
     Rectangle IandEwindow = { 660, 210, 650, 550 };
 
-    std::string income = "0";
-    std::string expenses = "0";
     std::string entIncome;
     std::string entExpense;
     std::string date;
     std::string balance;
     float enteredIncome;
     float enteredExpense;
-    float totalIncome = 0;
-    float totalExpense = 0;
     float tBalance;
 
     Rectangle incomeWindow = { 130, 210, 400, 550 };
