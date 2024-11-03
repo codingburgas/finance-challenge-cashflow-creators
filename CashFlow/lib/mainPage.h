@@ -1,6 +1,7 @@
 #pragma once
 #include "precompile.h"
 #include "pageHandle.h"
+#include "balance.h"
 
 class mainMenu {
 public:
@@ -9,7 +10,7 @@ public:
     void buttonHandler(pageBools& pages);
     void displayIncomeWindow();
     void displayExpensesWindow();
-    void textBoxHandler();
+    void textBoxHandler(pageBools& pages);
 
 private:
     Texture2D Logo;
@@ -25,11 +26,17 @@ private:
     Rectangle loginNowButton = { 1340, 25, 60, 25 };
     Rectangle IandEwindow = { 660, 210, 650, 550 };
 
-    std::string income = "895.32";
-    std::string expenses = "683.67";
-    std::string enterIncome;
-    std::string enterExpense;
+    std::string income;
+    std::string expenses;
+    std::string entIncome;
+    std::string entExpense;
     std::string date;
+    std::string balance;
+    float enteredIncome;
+    float enteredExpense;
+    float totalIncome = 0;
+    float totalExpense = 0;
+    float tBalance;
 
     Rectangle incomeWindow = { 130, 210, 400, 550 };
     Rectangle expensesWindow = { 130, 210, 400, 550 };

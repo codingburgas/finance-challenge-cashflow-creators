@@ -10,6 +10,7 @@ void mainMenu::mainMenuTextures() {
     closeWinSign = LoadTexture("assets/closeWinSign.png");
 }
 
+
 void mainMenu::displayMainMenu() {
     DrawTextEx(font, "     Welcome to\nCashFlow Banking!", { 160, 380 }, 48, 0.7, MG);
 
@@ -37,20 +38,22 @@ void mainMenu::displayMainMenu() {
     DrawTextureEx(plusSign, { 1190, 640 }, 0, 0.25, WHITE);
 }
 
+
 void mainMenu::displayIncomeWindow() {
     DrawRectangleRec(incomeWindow, BLACK);
     DrawRectangleLinesEx(incomeWindow, 0.7, MG);
     DrawTextEx(font, "Add Income", { 245, 230 }, 35, 0.7, MG);
-    DrawTextEx(font, "Add Expense", { 290, 720 }, 20, 0.7, MG);
+    DrawTextEx(font, "Add Expense", { 290, 718 }, 20, 0.7, MG);
     DrawTextEx(font, "Track your monthly income\n          with CashFlow!", { 158, 320 }, 32, 0.7, MG);
 
     DrawTextureEx(closeWinSign, { 435, 220 }, 0, 0.2, WHITE);
+    DrawTextureEx(plusSign, { 130, 640 }, 0, 0.25, WHITE);
 
     //Income text box
     DrawRectangleLinesEx({ 180, 450, 300, 50 }, 0.7, MG);
-    if (enterIncome.size() > 0)
+    if (entIncome.size() > 0)
     {
-        DrawTextEx(font, enterIncome.c_str(), { 192, 462 }, 25, 0.7, MG);
+        DrawTextEx(font, entIncome.c_str(), { 192, 462 }, 25, 0.7, MG);
     }
     else DrawTextEx(font, "Enter Income", { 192, 462 }, 25, 0.7, background);
 
@@ -70,14 +73,15 @@ void mainMenu::displayExpensesWindow() {
     DrawTextEx(font, "Add Expenses", { 240, 230 }, 35, 0.7, MG);
     DrawTextEx(font, "Track your monthly expenses\n           with CashFlow!", { 148, 320 }, 32, 0.7, MG);
 
-    DrawTextureEx(backArrowSign, { 430, 670 }, 0, 0.2, WHITE);
+    DrawTextureEx(backArrowSign, { 430, 665 }, 0, 0.2, WHITE);
     DrawTextureEx(closeWinSign, { 435, 220 }, 0, 0.2, WHITE);
+    DrawTextureEx(plusSign, { 130, 640 }, 0, 0.25, WHITE);
 
     //Expense text box
     DrawRectangleLinesEx({ 180, 450, 300, 50 }, 0.7, MG);
-    if (enterIncome.size() > 0)
+    if (entExpense.size() > 0)
     {
-        DrawTextEx(font, enterIncome.c_str(), { 192, 462 }, 25, 0.7, MG);
+        DrawTextEx(font, entExpense.c_str(), { 192, 462 }, 25, 0.7, MG);
     }
     else DrawTextEx(font, "Enter Expense", { 192, 462 }, 25, 0.7, background);
 
@@ -88,42 +92,61 @@ void mainMenu::displayExpensesWindow() {
         DrawTextEx(font, date.c_str(), { 192, 542 }, 25, 0.7, MG);
     }
     else DrawTextEx(font, "Enter Date (DD/MM/YYYY)", { 192, 542 }, 25, 0.7, background);
+
 }
 
-void mainMenu::textBoxHandler() {
+
+void mainMenu::textBoxHandler(pageBools& pages) {
     if (CheckCollisionPointRec(GetMousePosition(), incomeAndExpenseHB))
     {
         SetMouseCursor(MOUSE_CURSOR_IBEAM);
-        int key = GetCharPressed();
-        if ((key >= 45) && (key <= 57) && (enterIncome.size() < 14))
-        {
-            enterIncome.push_back((char)key);
+        if (pages.incomeWindowShouldDisplay) {
+            int key = GetCharPressed();
+            if ((key >= 45) && (key <= 57) && (entIncome.size() < 14))
+            {
+                entIncome.push_back((char)key);
+            }
+            if (IsKeyPressed(KEY_BACKSPACE))
+            {
+                if (entIncome.size() > 0)
+                    entIncome.pop_back();
+            }
+            return;
+        
+            if (CheckCollisionPointRec(GetMousePosition(), dateHB))
+            {
+                SetMouseCursor(MOUSE_CURSOR_IBEAM);
+                int key = GetCharPressed();
+                if ((key >= 47) && (key <= 57) && (date.size() < 10))
+                {
+                    date.push_back((char)key);
+                }
+                if (IsKeyPressed(KEY_BACKSPACE))
+                {
+                    if (date.size() > 0)
+                        date.pop_back();
+                }
+                return;
+            }
         }
-        if (IsKeyPressed(KEY_BACKSPACE))
-        {
-            if (enterIncome.size() > 0)
-                enterIncome.pop_back();
+        if (pages.expensesWindowShouldDisplay) {
+            int key = GetCharPressed();
+            if ((key >= 45) && (key <= 57) && (entExpense.size() < 14))
+            {
+                entExpense.push_back((char)key);
+            }
+            if (IsKeyPressed(KEY_BACKSPACE))
+            {
+                if (entExpense.size() > 0)
+                    entExpense.pop_back();
+            }
+            return;
         }
-        return;
-    }
-
-    if (CheckCollisionPointRec(GetMousePosition(), dateHB))
-    {
-        SetMouseCursor(MOUSE_CURSOR_IBEAM);
-        int key = GetCharPressed();
-        if ((key >= 47) && (key <= 57) && (date.size() < 10))
-        {
-            date.push_back((char)key);
-        }
-        if (IsKeyPressed(KEY_BACKSPACE))
-        {
-            if (date.size() > 0)
-                date.pop_back();
-        }
-        return;
     }
     else SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 }
+
+
 
 void mainMenu::buttonHandler(pageBools& pages)
 {
@@ -140,8 +163,9 @@ void mainMenu::buttonHandler(pageBools& pages)
         }
     }
 
-        //expenses window button
-    if (CheckCollisionPointRec(GetMousePosition(), { 290, 720, 100, 20 }))
+
+        //expenses window buttons
+    if (CheckCollisionPointRec(GetMousePosition(), { 290, 718, 100, 20 }))
     {
         if (pages.expensesWindowShouldDisplay == false) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
@@ -154,9 +178,19 @@ void mainMenu::buttonHandler(pageBools& pages)
             }
         }
     }
-                
+    if (CheckCollisionPointRec(GetMousePosition(), { 160, 670, 65, 65 }))
+    {
+        if (pages.expensesWindowShouldDisplay == false) {
+            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                calculateBalance(entIncome, entExpense, enteredIncome, enteredExpense, totalIncome, totalExpense, tBalance);
+            }
+        }
+    }
+       
+
     //income window button
-        if (CheckCollisionPointRec(GetMousePosition(), { 450, 700, 55, 40 }))
+        if (CheckCollisionPointRec(GetMousePosition(), { 450, 695, 55, 40 }))
         {
             if (pages.incomeWindowShouldDisplay == false) {
                  SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
@@ -169,6 +203,7 @@ void mainMenu::buttonHandler(pageBools& pages)
                  }
             }
         }
+
 
     //close window button
         if (CheckCollisionPointRec(GetMousePosition(), { 475, 225, 30, 30 }))
@@ -184,6 +219,7 @@ void mainMenu::buttonHandler(pageBools& pages)
                  }
             }
         }
+
 
     //login button
         if (CheckCollisionPointRec(GetMousePosition(), loginNowButton))

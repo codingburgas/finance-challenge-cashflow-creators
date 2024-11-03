@@ -65,7 +65,7 @@ void app::pageHandler()
         mainMenu.displayMainMenu();
         mainMenu.displayIncomeWindow();
         mainMenu.buttonHandler(pageBools);
-        mainMenu.textBoxHandler();
+        mainMenu.textBoxHandler(pageBools);
         return;
     }
 
@@ -74,7 +74,7 @@ void app::pageHandler()
         mainMenu.displayMainMenu();
         mainMenu.displayExpensesWindow();
         mainMenu.buttonHandler(pageBools);
-        mainMenu.textBoxHandler();
+        mainMenu.textBoxHandler(pageBools);
         return;
     }
 
