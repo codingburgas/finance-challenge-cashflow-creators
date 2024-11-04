@@ -19,9 +19,6 @@ void MainMenu::displayMainMenu() {
     DrawRectangle(730, 0, 900, 75, MG);
     DrawRing(ringCenter, 20, -8.5, 180, 0, 300, customBrown);
     DrawTextureEx(Logo, logoPos, 0, 0.4, WHITE);
-    if (reg.firstName.empty() && reg.lastName.empty()) {
-        DrawTextEx(font, "Register", { 1340, 25 }, 25, 0.7, BLACK);
-    }
     DrawTextEx(font, "CashFlow Banking", { 1000, 23 }, 32, 0.7, BLACK);
     DrawTextEx(font, "Current Balance:", { 280, 8 }, 25, 0.7, BLACK);
     DrawTextEx(font, balance.c_str(), { 460, 8 }, 25, 0.7, BLACK);
@@ -31,7 +28,7 @@ void MainMenu::displayMainMenu() {
     DrawRectangleLinesEx (IandEwindow, 0.7, MG);
     if (login.loginSuccess) {
         // Call retrieveIncomeExpense and check its return value
-        if (retrieveIncomeExpense(login.logFirstName, login.logLastName, income, expenses, totalIncome, totalExpense)) {
+        if (retrieveIncomeExpense(reg.firstName, reg.lastName, income, expenses, totalIncome, totalExpense)) {
             std::cout << "Successfuly retrieved income and expenses" << std::endl;
             login.loginSuccess = false;
         }

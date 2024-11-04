@@ -24,25 +24,25 @@ void Login::displayLoginPage()
 
 	//Draw username text box
 	DrawRectangleLinesEx(usernameText, 0.7, MG);
-	if (logFirstName.size() > 0)
+	if (Reg.firstName.size() > 0)
 	{
-		DrawTextEx(font, logFirstName.c_str(), { 582, 287 }, 25, 0.7, MG);
+		DrawTextEx(font, Reg.firstName.c_str(), { 582, 287 }, 25, 0.7, MG);
 	}
 	else DrawTextEx(font, "First Name", { 582, 287 }, 25, 0.7, background);
 
 	//Draw surname text box
 	DrawRectangleLinesEx(passwordText, 0.7, MG);
-	if (logLastName.size() > 0)
+	if (Reg.lastName.size() > 0)
 	{
-		DrawTextEx(font, logLastName.c_str(), { 582, 387 }, 25, 0.7, MG);
+		DrawTextEx(font, Reg.lastName.c_str(), { 582, 387 }, 25, 0.7, MG);
 	}
 	else DrawTextEx(font, "Surname", { 582, 387 }, 25, 0.7, background);
 
-	//Draw email text box
+	//Draw password text box
 	DrawRectangleLinesEx(emailText, 0.7, MG);
-	if (logPassword.size() > 0)
+	if (Reg.password.size() > 0)
 	{
-		DrawTextEx(font, logPassword.c_str(), { 582, 487 }, 25, 0.7, MG);
+		DrawTextEx(font, Reg.password.c_str(), { 582, 487 }, 25, 0.7, MG);
 	}
 	else DrawTextEx(font, "Password", { 582, 487 }, 25, 0.7, background);
 
@@ -60,14 +60,14 @@ void Login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (logFirstName.size() < 14))
+		if ((key >= 32) && (key <= 125) && (Reg.firstName.size() < 14))
 		{
-			logFirstName.push_back((char)key);
+			Reg.firstName.push_back((char)key);
 		}
 		if (IsKeyPressed(KEY_BACKSPACE))
 		{
-			if (logFirstName.size() > 0)
-				logFirstName.pop_back();
+			if (Reg.firstName.size() > 0)
+				Reg.firstName.pop_back();
 		}
 		return;
 
@@ -78,14 +78,14 @@ void Login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (logLastName.size() < 14))
+		if ((key >= 32) && (key <= 125) && (Reg.lastName.size() < 14))
 		{
-			logLastName.push_back((char)key);
+			Reg.lastName.push_back((char)key);
 		}
 		if (IsKeyPressed(KEY_BACKSPACE))
 		{
-			if (logLastName.size() > 0)
-				logLastName.pop_back();
+			if (Reg.lastName.size() > 0)
+				Reg.lastName.pop_back();
 		}
 		return;
 	}
@@ -94,14 +94,14 @@ void Login::textBoxHandler()
 	{
 		SetMouseCursor(MOUSE_CURSOR_IBEAM);
 		int key = GetCharPressed();
-		if ((key >= 32) && (key <= 125) && (logPassword.size() < 16))
+		if ((key >= 32) && (key <= 125) && (Reg.password.size() < 16))
 		{
-			logPassword.push_back((char)key);
+			Reg.password.push_back((char)key);
 		}
 		if (IsKeyPressed(KEY_BACKSPACE))
 		{
-			if (logPassword.size() > 0)
-				logPassword.pop_back();
+			if (Reg.password.size() > 0)
+				Reg.password.pop_back();
 		}
 		return;
 	}
@@ -113,7 +113,7 @@ void Login::buttonHandler(PageBools& pages)
 	if (CheckCollisionPointRec(GetMousePosition(), loginButton)) 
 	{
 		SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-		if (!checkPassword(logPassword)) {
+		if (!checkPassword(Reg.password)) {
 			DrawTextEx(font, "Password incompatible", { 582, 530 }, 25, 0.7, MG);
 		}
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -157,7 +157,7 @@ void Login::buttonHandler(PageBools& pages)
 }
 
 bool Login::loginHandler() {
-	std::string fileLine = createLoginFileLine(logFirstName, logLastName, logPassword);
+	std::string fileLine = createLoginFileLine(Reg.firstName, Reg.lastName, Reg.password);
 	std::fstream loginFile("../files/login.txt");
 
 	// Ensure the file is open before proceeding
@@ -165,6 +165,8 @@ bool Login::loginHandler() {
 		std::cerr << "Error: Could not open login file." << std::endl;
 		return false;
 	}
+
+	std::cout << "Trying to match lines in login.txt" << fileLine << std::endl;
 
 	// Return the result of checkIfInFile directly
 	return checkIfInFile(loginFile, fileLine);

@@ -6,6 +6,8 @@
 
 class Reg {
 public:
+
+
 	void displayRegisterPage();
 	void buttonHandler(PageBools& pages);
 	void textBoxHandler();
@@ -16,6 +18,7 @@ public:
 	std::string password;
 
 private:
+	
 	Texture2D Logo;
 	Texture2D regButton;
 	Vector2 logoPos = { 590, 10 };

@@ -129,8 +129,8 @@ void saveIncomeExpense(const std::string& firstName, const std::string& lastName
 
     // Write data in a specific format
     dataFile << firstName << " " << lastName << ": "
-        << "Income = " << std::fixed << std::setprecision(2) << income << " "
-        << "Expense = " << std::fixed << std::setprecision(2) << expense << std::endl;
+        << "Income=" << std::fixed << std::setprecision(2) << income << " "
+        << "Expense=" << std::fixed << std::setprecision(2) << expense << std::endl;
 
     dataFile.close();
 }

@@ -4,6 +4,7 @@
 #include "files.h"
 #include "login.h"
 #include "register.h"
+#include "registerPage.h"
 
 class Login {
 public:
@@ -15,7 +16,7 @@ public:
 	std::string logFirstName = "";
 	std::string logLastName = "";
 	std::string logPassword = "";
-	bool loginSuccess = false;
+	bool loginSuccess = true;
 
 private:
 	Texture2D Logo;
@@ -41,4 +42,5 @@ private:
 
 	Rectangle loginWindow = { 420, 180, 600, 670 };
 	Color customBrown = { 92, 83, 70, 255 };
+	Reg Reg;
 };
