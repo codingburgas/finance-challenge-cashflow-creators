@@ -3,10 +3,10 @@
 
 bool checkPassword(std::string password);
 
-bool checkValidity(std::string firstName, std::string registerPassword, std::string lastName);
+bool checkValidity(const std::string& firstName, const std::string& registerPassword, const std::string& lastName);
 
-bool checkFirstName(std::string firstName);
+bool checkFirstName(const std::string& firstName);
 
-bool checkLastName(std::string lastName);
+bool checkLastName(const std::string& lastName);
 
 std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword);

@@ -15,7 +15,7 @@ public:
 	std::string logFirstName = "";
 	std::string logLastName = "";
 	std::string logPassword = "";
-	bool loginSuccess = true;
+	bool loginSuccess = false;
 
 private:
 	Texture2D Logo;

@@ -2,36 +2,73 @@
 #include "../lib/balance.h"
 
 // Helper function to check if a string is a valid number
-bool isValidNumber(std::string& str) {
+bool isValidNumber(const std::string& str) {
     bool decimalPoint = false;
+    bool hasDigits = false;
 
+    // Check if the string is empty
     if (str.empty()) return false;
 
-    for (char c : str) {
+    // Check for a leading sign
+    size_t startIndex = 0;
+    if (str[0] == '-' || str[0] == '+') {
+        startIndex = 1;
+    }
+
+    // Iterate over each character in the string
+    for (size_t i = startIndex; i < str.size(); ++i) {
+        char c = str[i];
+
+        // Check for digits
         if (c >= '0' && c <= '9') {
-            continue;  
+            hasDigits = true;  // Found at least one digit
+            continue;
         }
+
+        // Check for decimal point
         if (c == '.' && !decimalPoint) {
             decimalPoint = true;
             continue;
         }
+
+        // If we reach here, it's invalid
         return false;
     }
-    return true;
+
+    // A valid number must have at least one digit
+    return hasDigits;
 }
 
 
-void calculateBalance(float& totalIncome, float& totalExpense, float& tBalance, std::string balance) {
-   
-        tBalance = totalIncome - totalExpense;
+void calculateBalance(float& totalIncome, float& totalExpense, float& totalBalance, std::string& balance) {
+    try {
+        totalBalance = totalIncome - totalExpense;
 
+        // Check if balance is valid and update totalBalance if needed
+        if (isValidNumber(balance)) {
+            try {
+                float parsedBalance = std::stof(balance);
+                totalBalance += parsedBalance;
+            }
+            catch (const std::invalid_argument&) {
+                std::cerr << "Conversion error: Non-numeric input for balance." << std::endl;
+            }
+            catch (const std::out_of_range&) {
+                std::cerr << "Input number for balance is out of range." << std::endl;
+            }
+        }
+        else {
+            std::cerr << "Invalid input: Non-numeric balance." << std::endl;
+        }
+
+        // Format the total balance string to two decimal places
         std::ostringstream oss;
-        oss << std::fixed << std::setprecision(2);
-
-        oss.str("");
-        oss << tBalance;
+        oss << std::fixed << std::setprecision(2) << totalBalance;
         balance = oss.str();
-
+    }
+    catch (const std::exception& e) {
+        std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
+    }
 }
 
 void calculateIncome(std::string& entIncome, std::string income, float& enteredIncome, float& totalIncome) {
@@ -46,7 +83,7 @@ void calculateIncome(std::string& entIncome, std::string income, float& enteredI
         totalIncome += enteredIncome;
 
         std::ostringstream oss;
-        oss.str("");  // Clear the stream
+        oss.str(""); 
         oss << totalIncome;
         income = oss.str();
     }
@@ -70,7 +107,7 @@ void calculateExpenses(std::string& entExpense,std::string expense, float& enter
         totalExpense += enteredExpense;
 
         std::ostringstream oss;
-        oss.str("");  // Clear the stream
+        oss.str("");
         oss << totalExpense;
         expense = oss.str();
     }
@@ -109,7 +146,6 @@ bool retrieveIncomeExpense(const std::string& firstName, const std::string& last
     std::string fullName = firstName + " " + lastName + ":";
     while (std::getline(dataFile, line)) {
         if (line.find(fullName) != std::string::npos) {
-            // Parse the income and expense from the line
             size_t incomePos = line.find("Income=");
             size_t expensePos = line.find("Expense=");
 
@@ -120,24 +156,24 @@ bool retrieveIncomeExpense(const std::string& firstName, const std::string& last
 
                     // Turn the float into string
                     std::ostringstream ossIncome, ossExpenses;
-                    ossIncome << std::fixed << std::setprecision(2) << totalIncome; // Format income
-                    ossExpenses << std::fixed << std::setprecision(2) << totalExpense; // Format expenses
-                    income = ossIncome.str(); // Retrieve formatted string for income
+                    ossIncome << std::fixed << std::setprecision(2) << totalIncome;
+                    ossExpenses << std::fixed << std::setprecision(2) << totalExpense;
+                    income = ossIncome.str();
                     expenses = ossExpenses.str();
 
                     return true;  // Successfully retrieved data
                 }
                 catch (const std::invalid_argument& e) {
                     std::cout << "Invalid data in file: " << e.what() << std::endl;
-                    return false; // Return false if conversion fails
+                    return false;
                 }
                 catch (const std::out_of_range& e) {
                     std::cout << "Data out of range: " << e.what() << std::endl;
-                    return false; // Return false if conversion fails
+                    return false;
                 }
             }
         }
     }
     dataFile.close();
-    return false;  // Entry not found
+    return false;
 }

@@ -26,36 +26,26 @@ bool checkPassword(std::string password)
         return false;
 }
 
-bool checkValidity(std::string firstName, std::string registerPassword, std::string lastName)
-{
-    bool checkValidityB = false;
-    if (checkPassword(registerPassword) && checkFirstName(firstName) && checkLastName(lastName))
-    {
-        checkValidityB = true;
-    }
-    return checkValidityB;
+bool checkValidity(const std::string& firstName, const std::string& registerPassword, const std::string& lastName) {
+    return checkPassword(registerPassword) && checkFirstName(firstName) && checkLastName(lastName);
 }
 
-bool checkFirstName(std::string firstName)
-{
-    bool checkSize = false;
-    bool checkSpaces = false;
-    bool check = false;
-    if (firstName.size() > 0) checkSize = true;
-    if (firstName.find(' ') != std::string::npos) checkSpaces = true;
-    if (checkSize && checkSpaces) check = true;
-    return check;
+bool checkFirstName(const std::string& firstName) {
+    // Check if firstName is non-empty and does not contain spaces
+    bool checkSize = !firstName.empty();
+    bool checkSpaces = (firstName.find(' ') == std::string::npos);
+
+    // Return true if size is valid and there are no spaces
+    return checkSize && checkSpaces;
 }
 
-bool checkLastName(std::string lastName)
-{
-    bool checkSize = false;
-    bool checkSpaces = false;
-    bool check = false;
-    if (lastName.size() > 0) checkSize = true;
-    if (lastName.find(' ') != std::string::npos) checkSpaces = true;
-    if (checkSize && checkSpaces) check = true;
-    return check;
+bool checkLastName(const std::string& lastName) {
+    // Check if lastName is non-empty and does not contain spaces
+    bool checkSize = !lastName.empty();
+    bool checkSpaces = (lastName.find(' ') == std::string::npos);
+
+    // Return true if size is valid and there are no spaces
+    return checkSize && checkSpaces;
 }
 
 std::string createFileLine(std::string& loginFirstName, std::string loginlastName, std::string& loginPassword)

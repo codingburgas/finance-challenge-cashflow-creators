@@ -1,4 +1,1 @@
-Sam Davidson: Income=1256 Expense=623.63
-
-
- : Income = 2752.00 Expense = 0.00
+Panayot Andonov: Income = 1946.39 Expense = 1633.48

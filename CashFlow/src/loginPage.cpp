@@ -156,14 +156,16 @@ void Login::buttonHandler(PageBools& pages)
 	}
 }
 
-bool Login::loginHandler()
-{
-	bool check = false;
+bool Login::loginHandler() {
 	std::string fileLine = createLoginFileLine(logFirstName, logLastName, logPassword);
-	std::fstream loginFile;
-	loginFile.open("../files/login.txt", std::ios::in | std::ios::out);
-	if (checkIfInFile(loginFile, fileLine))
-		check = true;
-	loginFile.close();
-	return check;
+	std::fstream loginFile("../files/login.txt");
+
+	// Ensure the file is open before proceeding
+	if (!loginFile.is_open()) {
+		std::cerr << "Error: Could not open login file." << std::endl;
+		return false;
+	}
+
+	// Return the result of checkIfInFile directly
+	return checkIfInFile(loginFile, fileLine);
 }

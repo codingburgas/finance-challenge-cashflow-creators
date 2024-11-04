@@ -55,8 +55,8 @@ void App::pageHandler()
     if (pageBools.loginPageShouldDisplay)
     {
         login.displayLoginPage();
-        login.buttonHandler(pageBools);
         login.textBoxHandler();
+        login.buttonHandler(pageBools);
         return;
     }
 

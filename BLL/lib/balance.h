@@ -3,7 +3,7 @@
 
 bool isValidNumber(const std::string& str);
 
-void calculateBalance(float& totalIncome, float& totalExpense, float& tBalance, std::string balance);
+void calculateBalance(float& totalIncome, float& totalExpense, float& tBalance, std::string& balance);
 
 void calculateIncome(std::string& enterIncome, std::string income, float& enteredIncome, float& totalIncome);
 

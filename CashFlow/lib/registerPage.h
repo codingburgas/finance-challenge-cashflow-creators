@@ -13,7 +13,6 @@ public:
 	void registerPageTextures();
 	std::string firstName;
 	std::string lastName;
-	std::string email;
 	std::string password;
 
 private:

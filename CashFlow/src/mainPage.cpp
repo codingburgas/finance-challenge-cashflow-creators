@@ -19,12 +19,28 @@ void MainMenu::displayMainMenu() {
     DrawRectangle(730, 0, 900, 75, MG);
     DrawRing(ringCenter, 20, -8.5, 180, 0, 300, customBrown);
     DrawTextureEx(Logo, logoPos, 0, 0.4, WHITE);
-    DrawTextEx(font, "Log In", { 1340, 25 }, 25, 0.7, BLACK);
+    if (reg.firstName.empty() && reg.lastName.empty()) {
+        DrawTextEx(font, "Register", { 1340, 25 }, 25, 0.7, BLACK);
+    }
     DrawTextEx(font, "CashFlow Banking", { 1000, 23 }, 32, 0.7, BLACK);
+    DrawTextEx(font, "Current Balance:", { 280, 8 }, 25, 0.7, BLACK);
+    DrawTextEx(font, balance.c_str(), { 460, 8 }, 25, 0.7, BLACK);
 
     //Income and Expenses Window
     DrawRectangleRec(IandEwindow, BLACK);
     DrawRectangleLinesEx (IandEwindow, 0.7, MG);
+    if (login.loginSuccess) {
+        // Call retrieveIncomeExpense and check its return value
+        if (retrieveIncomeExpense(login.logFirstName, login.logLastName, income, expenses, totalIncome, totalExpense)) {
+            std::cout << "Successfuly retrieved income and expenses" << std::endl;
+            login.loginSuccess = false;
+        }
+        else {
+            // Handle the failure case, such as displaying an error message
+            std::cout << "Failed to retrieve income and expenses." << std::endl;
+            login.loginSuccess = false;
+        }
+    }
 
     DrawTextEx(font, "Monthly\n Income: ", { 780, 240 }, 35, 0.7, MG);
     DrawTextEx(font, " Monthly \nExpenses:", { 1080, 240 }, 35, 0.7, MG);
@@ -166,6 +182,9 @@ void MainMenu::textBoxHandler(PageBools& pages) {
 
 void MainMenu::buttonHandler(PageBools& pages)
 {
+    if (pages.mainPageShouldDisplay && balance == "0") {
+        calculateBalance(totalIncome, totalExpense, tBalance, balance);
+    }
     //income and expenses window button
     if (CheckCollisionPointRec(GetMousePosition(), { 1220, 670, 65, 65 }))
     {
@@ -176,17 +195,6 @@ void MainMenu::buttonHandler(PageBools& pages)
             pages.loginPageShouldDisplay = false;
             pages.incomeWindowShouldDisplay = true;
             pages.expensesWindowShouldDisplay = false;
-            if (login.loginSuccess) {
-                // Call retrieveIncomeExpense and check its return value
-                if (retrieveIncomeExpense(login.logFirstName, login.logLastName, income, expenses, totalIncome, totalExpense)) {
-                    std::cout << "Successfuly retrieved income and expenses" << std::endl;
-                    login.loginSuccess = false;
-                }
-                else {
-                    // Handle the failure case, such as displaying an error message
-                    std::cout << "Failed to retrieve income and expenses." << std::endl;
-                }
-            }
         }
     }
 
@@ -211,12 +219,17 @@ void MainMenu::buttonHandler(PageBools& pages)
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                 calculateIncome(entIncome, income, enteredIncome, totalIncome);
-                entIncome = "";
                 std::ostringstream oss;
-                oss.str("");  // Clear the stream
+                oss.str("");
                 oss << totalIncome;
                 income = oss.str();
                 saveIncomeExpense(reg.firstName, reg.lastName, totalIncome, totalExpense);
+                if (entIncome.size() > 0) {
+                    balance = "0.00";
+                    calculateBalance(totalIncome, totalExpense, tBalance, balance);
+                }
+                entIncome = "";
+                date = "";
             }
         }
     }
@@ -243,12 +256,17 @@ void MainMenu::buttonHandler(PageBools& pages)
                 SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
                 if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                     calculateExpenses(entExpense, expenses, enteredExpense, totalExpense);
-                    entIncome = "";
                     std::ostringstream oss;
-                    oss.str("");  // Clear the stream
-                    oss << totalIncome;
-                    income = oss.str();
+                    oss.str("");
+                    oss << totalExpense;
+                    expenses = oss.str();
                     saveIncomeExpense(reg.firstName, reg.lastName, totalIncome, totalExpense);
+                    if (entExpense.size() > 0) {
+                        balance = "0";
+                        calculateBalance(totalIncome, totalExpense, tBalance, balance);
+                    }
+                    entExpense = "";
+                    date = "";
                 }
             }
         }

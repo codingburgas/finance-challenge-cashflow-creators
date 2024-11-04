@@ -16,8 +16,10 @@ public:
     void DrawCenteredText(std::string& text, Vector2 centerPoint, int fontSize, Color color, Font font);
     std::string income = "0";
     std::string expenses = "0";
+    std::string balance = "0.00";
     float totalIncome = 0;
     float totalExpense = 0;
+    float tBalance = 0;
 
 private:
     Texture2D Logo;
@@ -35,11 +37,9 @@ private:
 
     std::string entIncome;
     std::string entExpense;
-    std::string date;
-    std::string balance;
+    std::string date = "";
     float enteredIncome;
     float enteredExpense;
-    float tBalance;
 
     Rectangle incomeWindow = { 130, 210, 400, 550 };
     Rectangle expensesWindow = { 130, 210, 400, 550 };
